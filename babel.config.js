@@ -11,7 +11,7 @@ module.exports = {
           "@components": "./src/components",
           "@features": "./src/features",
           "@navigation": "./src/navigation",
-          "@services": "./src/services",
+          "@service": "./src/service",
           "@utils": "./src/utils",
           "@styles": "./src/styles",
           "@state": "./src/state",
