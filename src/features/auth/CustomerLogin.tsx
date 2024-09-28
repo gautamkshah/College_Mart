@@ -46,7 +46,7 @@ const CustomerLogin: FC = () => {
         Keyboard.dismiss()
         setLoading(true)
         try{
-            await customerLogins(phoneNumber)
+            // await customerLogins(phoneNumber)
             resetAndNavigate('ProductDashboard')
         }catch(e){
             console.log("Loading Failed",e)

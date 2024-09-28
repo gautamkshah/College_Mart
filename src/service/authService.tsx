@@ -6,8 +6,10 @@ import { resetAndNavigate } from '@utils/NavigationUtils'
 
 export const customerLogins = async (phone: string) => {
     try {
-        console.log("Phone", phone)
+        
+        
         const response = await axios.post(`${BASE_URL}/customer/login`, { phone })
+        console.log("Phone", phone)
         const {accessToken,refreshToken,customer} =response.data
         tokenStorage.set("accessToken",accessToken)
         tokenStorage.set("refreshToken",refreshToken)
