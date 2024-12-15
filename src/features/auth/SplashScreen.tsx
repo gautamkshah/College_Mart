@@ -39,7 +39,7 @@ const SplashScreen: FC = () => {
       if (decodedAccessToken?.exp < currentTime) {
         try {
           refresh_tokens()
-          // await refetchUser(setUser)
+          await refetchUser(setUser)
 
 
         }
@@ -51,28 +51,21 @@ const SplashScreen: FC = () => {
 
       }
 
-      if(user?.role=="customer"){
+      if (user?.role == "customer") {
         resetAndNavigate("ProductDashboard")
-      }else {
-        
+      } else {
+        resetAndNavigate("DeliveryDashboard")
       }
-
-  
       return true
-
-
     }
     resetAndNavigate("CustomerLogin")
     return false
   }
-
-
   useEffect(() => {
     const fetchUserLocation = async () => {
       try {
         GeoLocation.requestAuthorization()
         tokenCheck()
-
       }
       catch (e) {
         console.log(e)

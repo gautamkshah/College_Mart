@@ -19,8 +19,8 @@ export const mmkvStorage ={
         const value = storage.getString(key)
         return value ?? null
     },
-    deleteItem: (key: string) => {
+    removeItem: (key: string) => {
         storage.delete(key)
     }
-    
-}
+
+};
