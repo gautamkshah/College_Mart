@@ -50,10 +50,13 @@ const SplashScreen: FC = () => {
         }
 
       }
+      console.log("User", user)
 
-      if (user?.role == "customer") {
+      if (user?.role == "Customer") {
+        console.log("Customer")
         resetAndNavigate("ProductDashboard")
       } else {
+        console.log("Delivery")
         resetAndNavigate("DeliveryDashboard")
       }
       return true

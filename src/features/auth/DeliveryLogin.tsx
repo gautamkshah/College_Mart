@@ -11,6 +11,9 @@ import LottieView from 'lottie-react-native'
 import CustomText from '@components/ui/CustomText'
 import { Fonts } from '@utils/Constants'
 import CustomInput from '@components/ui/Custominput'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { RFValue } from 'react-native-responsive-fontsize'
+import CustomButton from '@components/ui/CustomButton'
 
 const DeliveryLogin: FC = () => {
   const [email, setEmail] = useState('')
@@ -42,7 +45,29 @@ const DeliveryLogin: FC = () => {
           </View>
           <CustomText variant='h3' fontFamily={Fonts.Bold}> Delivery Partner Portal</CustomText>
           <CustomText variant='h5' fontFamily={Fonts.SemiBold}> Faster than Flash</CustomText>
-          <CustomInput onChangeText={setEmail} value={email} placeholder='Email' />
+          <CustomInput 
+            onChangeText={setEmail} 
+            value={email} 
+            placeholder='Email'
+            left={<Icon name='mail' color={'#FF890E'} size={RFValue(18)} style={{ marginLeft: 10 }} />}
+            inputMode='email'
+            right={false}
+          />
+           <CustomInput 
+            onChangeText={setPassword} 
+            value={password} 
+            placeholder='Password'
+            left={<Icon name='key-sharp' color={'#FF890E'} size={RFValue(18)} style={{ marginLeft: 10 }} />}
+            secureTextEntry
+            right={false}
+          />
+          <CustomButton 
+            title='Login' 
+            onPress={handlelogin} 
+            loading={loading} 
+            disabled={email.length==0 || password.length<4} />
+          
+
 
 
         </View>

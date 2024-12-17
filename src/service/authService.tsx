@@ -26,7 +26,7 @@ export const customerLogins = async (phone: string) => {
 
 export const deliveryLogin = async (email: string,password:string) => {
     try {
-        
+        console.log("Email", email);
         const response = await axiosClient.post('/api/delivery/login', { email,password });
         const { accessToken, refreshToken, deliveryPartner } = response.data;
         tokenStorage.set("accessToken", accessToken);
