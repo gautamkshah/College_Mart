@@ -18,7 +18,7 @@ const AnimatedHeader: FC<{ showNotice: () => void }> = ({ showNotice }) => {
 
       return (
             <Animated.View style={[headerAnimatedStyle]}>
-                  //3.33
+                  
              </Animated.View>
       )
 }
