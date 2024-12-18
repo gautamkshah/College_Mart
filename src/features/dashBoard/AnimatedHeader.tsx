@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, { FC } from 'react'
 import { useCollapsibleContext } from '@r0b0t3d/react-native-collapsible'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
+import Header from '@components/dashboard/Header'
 
 const AnimatedHeader: FC<{ showNotice: () => void }> = ({ showNotice }) => {
 
@@ -18,7 +19,7 @@ const AnimatedHeader: FC<{ showNotice: () => void }> = ({ showNotice }) => {
 
       return (
             <Animated.View style={[headerAnimatedStyle]}>
-                  
+                  <Header showNotice={showNotice} />
              </Animated.View>
       )
 }
