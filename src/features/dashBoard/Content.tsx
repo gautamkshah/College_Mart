@@ -9,19 +9,29 @@ import CategoryContainer from '@components/dashboard/CategoryContainer'
 const Content = () => {
   return (
     <View style={styles.constiner}>
-      <AdCourasel adData={adData}/>
+      <AdCourasel adData={adData} />
       <CustomText variant='h5' fontFamily={Fonts.SemiBold}>
         Grocery & Kitchen
       </CustomText>
-      <CategoryContainer data={categories}/>
+      <CategoryContainer data={categories} />
+      <CustomText variant='h5' fontFamily={Fonts.SemiBold}>
+        BestSellers
+      </CustomText>
+      <CategoryContainer data={categories} /><CustomText variant='h5' fontFamily={Fonts.SemiBold}>
+        Snacks and Drinks
+      </CustomText>
+      <CategoryContainer data={categories} /><CustomText variant='h5' fontFamily={Fonts.SemiBold}>
+       Home applications
+      </CustomText>
+      <CategoryContainer data={categories} />
     </View>
   )
 }
 
 
-const styles=StyleSheet.create({
-  constiner:{
-    paddingHorizontal:20
+const styles = StyleSheet.create({
+  constiner: {
+    paddingHorizontal: 20
   }
 })
 export default Content

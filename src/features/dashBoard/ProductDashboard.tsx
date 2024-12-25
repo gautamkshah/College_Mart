@@ -1,12 +1,12 @@
-import { View, Text, Animated as RNAnimated, StyleSheet } from 'react-native'
-import React, { useEffect, useRef } from 'react'
+import { View, Text, Animated as RNAnimated, StyleSheet, TouchableOpacity, Platform } from 'react-native'
+import React, { FC, useEffect, useRef } from 'react'
 import { useAuthStorage } from '@state/authStorage'
 import NoticeAnimmation from './NoticeAnimmation'
-import { NoticeHeight } from '@utils/scalling'
-import { SlideInDown } from 'react-native-reanimated'
+import { NoticeHeight, screenHeight } from '@utils/scalling'
+import Animated, { SlideInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native'
 import Visuals from './Visuals'
-import { CollapsibleContainer, CollapsibleHeaderContainer, CollapsibleScrollView, withCollapsibleContext } from '@r0b0t3d/react-native-collapsible'
+import { CollapsibleContainer, CollapsibleHeaderContainer, CollapsibleScrollView, useCollapsibleContext, withCollapsibleContext } from '@r0b0t3d/react-native-collapsible'
 const NOTICE_HEIGHT = -(NoticeHeight + 12)
 import AnimatedHeader from './AnimatedHeader'
 import StickySearchBar from './StickySearchBar'
@@ -14,8 +14,21 @@ import Content from './Content'
 import CustomText from '@components/ui/CustomText'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Fonts } from '@utils/Constants'
+import Icon  from 'react-native-vector-icons/Ionicons'
 
-const ProductDashboard = () => {
+const ProductDashboard :FC= () => {
+
+  const {scrollY,expand}= useCollapsibleContext()
+  const previousScroll=useRef<number>(0)
+  const backtotopstyle= useAnimatedStyle(()=>{
+    const isscrollingup=scrollY.value< previousScroll.current && scrollY.value>180 
+    const opacity= withTiming(isscrollingup?1:0,  {duration:300})
+    const translateY= withTiming(isscrollingup?0:10, {duration:300})
+
+    previousScroll.current=scrollY.value
+    return {opacity,transform:[{translateY}]}
+
+  })
   const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current
   console.log(NoticePosition)
   const slideUp = () => {
@@ -48,6 +61,22 @@ const ProductDashboard = () => {
       <>
         <Visuals />
         <SafeAreaView />
+
+        <Animated.View style={[style.backtotopbutton, backtotopstyle]}>
+          <TouchableOpacity 
+          onPress={()=>{
+            scrollY.value=0
+            expand()
+          }}
+          style={{flexDirection:'row', alignItems:'center', gap:6}} >
+            <Icon name='arrow-up-circle-outline' color={'#fff'} size={RFValue(12)} />
+            <CustomText variant='h9' style={{color:'#fff'}} fontFamily={Fonts.SemiBold}>
+              Back to Top
+            </CustomText>
+          </TouchableOpacity>
+        </Animated.View>
+
+
         <CollapsibleContainer style={style.panelContainer}>
           <CollapsibleHeaderContainer containerStyle={style.transparent}>
             <AnimatedHeader showNotice={() => {
@@ -60,16 +89,17 @@ const ProductDashboard = () => {
             <StickySearchBar />
 
           </CollapsibleHeaderContainer>
+          
 
           <CollapsibleScrollView nestedScrollEnabled style={style.panelContainer} showsVerticalScrollIndicator={false}>
 
-            <Content />
+          <Content />
             <View style={{ backgroundColor: '#F8F8F8', padding: 20 }}>
               <CustomText variant='h1' fontFamily={Fonts.Bold} style={{ opacity: 0.2 }}>
                 Your last minute App 🥭
               </CustomText>
-              <CustomText  fontFamily={Fonts.Bold} style={{ marginTop:10, paddingBottom:100,opacity: 0.2 }}>
-                Developed by ❤️ Gautam 
+              <CustomText fontFamily={Fonts.Bold} style={{ marginTop: 10, paddingBottom: 100, opacity: 0.2 }}>
+                Developed by ❤️ Gautam
               </CustomText>
 
             </View>
@@ -93,6 +123,19 @@ const style = StyleSheet.create({
   },
   transparent: {
     backgroundColor: 'transparent'
+  },
+  backtotopbutton:{
+    position:'absolute',
+    alignSelf:'center',
+    top:Platform.OS==='ios'? screenHeight*0.18:100,
+    flexDirection:'row',
+    alignItems:'center',
+    gap:4,
+    backgroundColor:'black',
+    borderRadius:20,
+    paddingHorizontal:10,
+    paddingVertical:5,
+    zIndex: 999
   }
 })
 
