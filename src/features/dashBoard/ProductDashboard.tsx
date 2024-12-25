@@ -10,6 +10,10 @@ import { CollapsibleContainer, CollapsibleHeaderContainer, CollapsibleScrollView
 const NOTICE_HEIGHT = -(NoticeHeight + 12)
 import AnimatedHeader from './AnimatedHeader'
 import StickySearchBar from './StickySearchBar'
+import Content from './Content'
+import CustomText from '@components/ui/CustomText'
+import { RFValue } from 'react-native-responsive-fontsize'
+import { Fonts } from '@utils/Constants'
 
 const ProductDashboard = () => {
   const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current
@@ -59,7 +63,20 @@ const ProductDashboard = () => {
 
           <CollapsibleScrollView nestedScrollEnabled style={style.panelContainer} showsVerticalScrollIndicator={false}>
 
-         {/* //3:58 */}
+            <Content />
+            <View style={{ backgroundColor: '#F8F8F8', padding: 20 }}>
+              <CustomText variant='h1' fontFamily={Fonts.Bold} style={{ opacity: 0.2 }}>
+                Your last minute App 🥭
+              </CustomText>
+              <CustomText  fontFamily={Fonts.Bold} style={{ marginTop:10, paddingBottom:100,opacity: 0.2 }}>
+                Developed by ❤️ Gautam 
+              </CustomText>
+
+            </View>
+
+
+
+
           </CollapsibleScrollView>
 
         </CollapsibleContainer>
