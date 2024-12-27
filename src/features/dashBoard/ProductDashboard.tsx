@@ -1,6 +1,5 @@
 import { View, Text, Animated as RNAnimated, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import React, { FC, useEffect, useRef } from 'react'
-import { useAuthStorage } from '@state/authStorage'
 import NoticeAnimmation from './NoticeAnimmation'
 import { NoticeHeight, screenHeight } from '@utils/scalling'
 import Animated, { SlideInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated'
@@ -14,19 +13,19 @@ import Content from './Content'
 import CustomText from '@components/ui/CustomText'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Fonts } from '@utils/Constants'
-import Icon  from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-const ProductDashboard :FC= () => {
+const ProductDashboard: FC = () => {
 
-  const {scrollY,expand}= useCollapsibleContext()
-  const previousScroll=useRef<number>(0)
-  const backtotopstyle= useAnimatedStyle(()=>{
-    const isscrollingup=scrollY.value< previousScroll.current && scrollY.value>180 
-    const opacity= withTiming(isscrollingup?1:0,  {duration:300})
-    const translateY= withTiming(isscrollingup?0:10, {duration:300})
+  const { scrollY, expand } = useCollapsibleContext()
+  const previousScroll = useRef<number>(0)
+  const backtotopstyle = useAnimatedStyle(() => {
+    const isscrollingup = scrollY.value < previousScroll.current && scrollY.value > 180
+    const opacity = withTiming(isscrollingup ? 1 : 0, { duration: 300 })
+    const translateY = withTiming(isscrollingup ? 0 : 10, { duration: 300 })
 
-    previousScroll.current=scrollY.value
-    return {opacity,transform:[{translateY}]}
+    previousScroll.current = scrollY.value
+    return { opacity, transform: [{ translateY }] }
 
   })
   const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current
@@ -63,14 +62,14 @@ const ProductDashboard :FC= () => {
         <SafeAreaView />
 
         <Animated.View style={[style.backtotopbutton, backtotopstyle]}>
-          <TouchableOpacity 
-          onPress={()=>{
-            scrollY.value=0
-            expand()
-          }}
-          style={{flexDirection:'row', alignItems:'center', gap:6}} >
+          <TouchableOpacity
+            onPress={() => {
+              scrollY.value = 0
+              expand()
+            }}
+            style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} >
             <Icon name='arrow-up-circle-outline' color={'#fff'} size={RFValue(12)} />
-            <CustomText variant='h9' style={{color:'#fff'}} fontFamily={Fonts.SemiBold}>
+            <CustomText variant='h9' style={{ color: '#fff' }} fontFamily={Fonts.SemiBold}>
               Back to Top
             </CustomText>
           </TouchableOpacity>
@@ -89,11 +88,11 @@ const ProductDashboard :FC= () => {
             <StickySearchBar />
 
           </CollapsibleHeaderContainer>
-          
+
 
           <CollapsibleScrollView nestedScrollEnabled style={style.panelContainer} showsVerticalScrollIndicator={false}>
 
-          <Content />
+            <Content />
             <View style={{ backgroundColor: '#F8F8F8', padding: 20 }}>
               <CustomText variant='h1' fontFamily={Fonts.Bold} style={{ opacity: 0.2 }}>
                 Your last minute App 🥭
@@ -124,17 +123,17 @@ const style = StyleSheet.create({
   transparent: {
     backgroundColor: 'transparent'
   },
-  backtotopbutton:{
-    position:'absolute',
-    alignSelf:'center',
-    top:Platform.OS==='ios'? screenHeight*0.18:100,
-    flexDirection:'row',
-    alignItems:'center',
-    gap:4,
-    backgroundColor:'black',
-    borderRadius:20,
-    paddingHorizontal:10,
-    paddingVertical:5,
+  backtotopbutton: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: Platform.OS === 'ios' ? screenHeight * 0.18 : 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'black',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     zIndex: 999
   }
 })
