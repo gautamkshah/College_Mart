@@ -1,59 +1,74 @@
-import { View, Text, Animated as RNAnimated, StyleSheet, TouchableOpacity, Platform } from 'react-native'
-import React, { FC, useEffect, useRef } from 'react'
-import NoticeAnimmation from './NoticeAnimmation'
-import { NoticeHeight, screenHeight } from '@utils/scalling'
-import Animated, { SlideInDown, useAnimatedStyle, withTiming } from 'react-native-reanimated'
-import { SafeAreaView } from 'react-native'
-import Visuals from './Visuals'
-import { CollapsibleContainer, CollapsibleHeaderContainer, CollapsibleScrollView, useCollapsibleContext, withCollapsibleContext } from '@r0b0t3d/react-native-collapsible'
-const NOTICE_HEIGHT = -(NoticeHeight + 12)
-import AnimatedHeader from './AnimatedHeader'
-import StickySearchBar from './StickySearchBar'
-import Content from './Content'
-import CustomText from '@components/ui/CustomText'
-import { RFValue } from 'react-native-responsive-fontsize'
-import { Fonts } from '@utils/Constants'
-import Icon from 'react-native-vector-icons/Ionicons'
+import {
+  View,
+  Text,
+  Animated as RNAnimated,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import React, {FC, useEffect, useRef} from 'react';
+import NoticeAnimmation from './NoticeAnimmation';
+import {NoticeHeight, screenHeight} from '@utils/scalling';
+import Animated, {
+  SlideInDown,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import {SafeAreaView} from 'react-native';
+import Visuals from './Visuals';
+import {
+  CollapsibleContainer,
+  CollapsibleHeaderContainer,
+  CollapsibleScrollView,
+  useCollapsibleContext,
+  withCollapsibleContext,
+} from '@r0b0t3d/react-native-collapsible';
+const NOTICE_HEIGHT = -(NoticeHeight + 12);
+import AnimatedHeader from './AnimatedHeader';
+import StickySearchBar from './StickySearchBar';
+import Content from './Content';
+import CustomText from '@components/ui/CustomText';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {Fonts} from '@utils/Constants';
+import Icon from 'react-native-vector-icons/Ionicons';
+import withCart from '@features/cart/withCart';
 
 const ProductDashboard: FC = () => {
-
-  const { scrollY, expand } = useCollapsibleContext()
-  const previousScroll = useRef<number>(0)
+  const {scrollY, expand} = useCollapsibleContext();
+  const previousScroll = useRef<number>(0);
   const backtotopstyle = useAnimatedStyle(() => {
-    const isscrollingup = scrollY.value < previousScroll.current && scrollY.value > 180
-    const opacity = withTiming(isscrollingup ? 1 : 0, { duration: 300 })
-    const translateY = withTiming(isscrollingup ? 0 : 10, { duration: 300 })
+    const isscrollingup =
+      scrollY.value < previousScroll.current && scrollY.value > 180;
+    const opacity = withTiming(isscrollingup ? 1 : 0, {duration: 300});
+    const translateY = withTiming(isscrollingup ? 0 : 10, {duration: 300});
 
-    previousScroll.current = scrollY.value
-    return { opacity, transform: [{ translateY }] }
-
-  })
-  const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current
-  console.log(NoticePosition)
+    previousScroll.current = scrollY.value;
+    return {opacity, transform: [{translateY}]};
+  });
+  const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current;
+  console.log(NoticePosition);
   const slideUp = () => {
     RNAnimated.timing(NoticePosition, {
       toValue: NOTICE_HEIGHT,
       duration: 300,
-      useNativeDriver: false
-    }).start()
-  }
+      useNativeDriver: false,
+    }).start();
+  };
   const slideDown = () => {
     RNAnimated.timing(NoticePosition, {
       toValue: 0,
       duration: 300,
-      useNativeDriver: false
-    }).start()
-  }
+      useNativeDriver: false,
+    }).start();
+  };
 
   useEffect(() => {
-    slideDown()
+    slideDown();
     const timeoutid = setTimeout(() => {
-      slideUp()
-    }, 3500)
-    return () => clearTimeout(timeoutid)
-  }, [])
-
-
+      slideUp();
+    }, 3500);
+    return () => clearTimeout(timeoutid);
+  }, []);
 
   return (
     <NoticeAnimmation noticePosition={NoticePosition}>
@@ -61,67 +76,72 @@ const ProductDashboard: FC = () => {
         <Visuals />
         <SafeAreaView />
 
-        <Animated.View style={[style.backtotopbutton, backtotopstyle]}>
-          <TouchableOpacity
-            onPress={() => {
-              scrollY.value = 0
-              expand()
-            }}
-            style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} >
-            <Icon name='arrow-up-circle-outline' color={'#fff'} size={RFValue(12)} />
-            <CustomText variant='h9' style={{ color: '#fff' }} fontFamily={Fonts.SemiBold}>
+        <TouchableOpacity
+          onPress={() => {
+            scrollY.value = 0;
+            expand();
+          }}
+          style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
+          <Icon
+            name="arrow-up-circle-outline"
+            color={'#fff'}
+            size={RFValue(12)}
+          />
+          <Text>
+            <CustomText
+              variant="h9"
+              style={{color: '#fff'}}
+              fontFamily={Fonts.SemiBold}>
               Back to Top
             </CustomText>
-          </TouchableOpacity>
-        </Animated.View>
-
+          </Text>
+        </TouchableOpacity>
 
         <CollapsibleContainer style={style.panelContainer}>
           <CollapsibleHeaderContainer containerStyle={style.transparent}>
-            <AnimatedHeader showNotice={() => {
-              slideDown()
-              const timeoutId = setTimeout(() => {
-                slideUp()
-              }, 3500)
-              return () => clearTimeout(timeoutId)
-            }} />
+            <AnimatedHeader
+              showNotice={() => {
+                slideDown();
+                const timeoutId = setTimeout(() => {
+                  slideUp();
+                }, 3500);
+                return () => clearTimeout(timeoutId);
+              }}
+            />
             <StickySearchBar />
-
           </CollapsibleHeaderContainer>
 
-
-          <CollapsibleScrollView nestedScrollEnabled style={style.panelContainer} showsVerticalScrollIndicator={false}>
-
+          <CollapsibleScrollView
+            nestedScrollEnabled
+            style={style.panelContainer}
+            showsVerticalScrollIndicator={false}>
             <Content />
-            <View style={{ backgroundColor: '#F8F8F8', padding: 20 }}>
-              <CustomText variant='h1' fontFamily={Fonts.Bold} style={{ opacity: 0.2 }}>
+            <View style={{backgroundColor: '#F8F8F8', padding: 20}}>
+              <CustomText
+                variant="h1"
+                fontFamily={Fonts.Bold}
+                style={{opacity: 0.2}}>
                 Your last minute App 🥭
               </CustomText>
-              <CustomText fontFamily={Fonts.Bold} style={{ marginTop: 10, paddingBottom: 100, opacity: 0.2 }}>
+              <CustomText
+                fontFamily={Fonts.Bold}
+                style={{marginTop: 10, paddingBottom: 100, opacity: 0.2}}>
                 Developed by ❤️ Gautam
               </CustomText>
-
             </View>
-
-
-
-
           </CollapsibleScrollView>
-
         </CollapsibleContainer>
-
       </>
     </NoticeAnimmation>
-
-  )
-}
+  );
+};
 
 const style = StyleSheet.create({
   panelContainer: {
     flex: 1,
   },
   transparent: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   backtotopbutton: {
     position: 'absolute',
@@ -134,8 +154,8 @@ const style = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    zIndex: 999
-  }
-})
+    zIndex: 999,
+  },
+});
 
-export default withCollapsibleContext(ProductDashboard)
+export default withCart(withCollapsibleContext(ProductDashboard));

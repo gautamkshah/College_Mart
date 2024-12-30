@@ -10,6 +10,7 @@ import DeliveryLogin from '@features/auth/DeliveryLogin'
 import ProductDashboard from '@features/dashBoard/ProductDashboard'
 import DeliveryDashboard from '@features/Delivery/DeliveryDashboard'
 import ProductCategories from '@features/category/ProductCategories'
+import ProductOrder from '@features/order/ProductOrder'
 
 
 const Stack =createNativeStackNavigator()
@@ -25,7 +26,7 @@ const Navigation:FC = () => {
         <Stack.Screen name='DeliveryLogin' component={DeliveryLogin}/>
         <Stack.Screen name='ProductCategories' component={ProductCategories}/>
         
-        
+        <Stack.Screen name='ProductOrder' component={ProductOrder}/>
 
 
 

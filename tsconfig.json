@@ -10,6 +10,7 @@
       "@features/*": ["features/*"],
       "@state/*": ["state/*"],
       "@service/*": ["service/*"],
+      "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@navigation/*": ["navigation/*"],
     }

@@ -1,82 +1,91 @@
 import { Colors, Fonts } from "@utils/Constants";
 import { StyleSheet, Text, TextStyle } from "react-native";
-import { RFValue } from 'react-native-responsive-fontsize'
-interface Props {
-    variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8" | "h9" | "body";
-    fontFamily?: Fonts;
-    fontSize?: number;
-    style?: TextStyle | TextStyle[];
-    children?: React.ReactNode;
-    numberOfLines?: number;
-    onLayout?: (event: object) => void
+import { RFValue } from "react-native-responsive-fontsize";
 
+interface Props {
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8" | "h9" | "body";
+  fontFamily?: Fonts;
+  fontSize?: number; // Allow custom fontSize to be passed
+  style?: TextStyle | TextStyle[];
+  children?: React.ReactNode;
+  numberOfLines?: number;
+  onLayout?: (event: object) => void;
 }
 
 const CustomText: React.FC<Props> = ({
-    variant = "body",
-    fontFamily = Fonts.Regular,
-    fontSize,
-    style,
-    children,
-    numberOfLines,
-    onLayout,
-    ...props
+  variant = "body",
+  fontFamily = Fonts.Regular,
+  fontSize,
+  style,
+  children,
+  numberOfLines,
+  onLayout,
+  ...props
 }) => {
-    let computedFontSize: number;
-    switch (variant) {
-        case 'h1':
-            computedFontSize = RFValue(22);
-            break;
-        case 'h2':
-            computedFontSize = RFValue(20);
-            break;
-        case 'h3':
-            computedFontSize = RFValue(18);
-            break;
-        case 'h4':
-            computedFontSize = RFValue(16);
-            break;
-        case 'h5':
-            computedFontSize = RFValue(14);
-            break;
-        case 'h6':
-            computedFontSize = RFValue(12);
-            break;
-        case 'h7':
-            computedFontSize = RFValue(12);
-            break;
-        case 'h8':
-            computedFontSize = RFValue(10);
-            break;
-        case 'h9':
-            computedFontSize = RFValue(9);
-            break;
-        case 'body':
-            computedFontSize = RFValue(12);
-            break;
-    }
-    const fontFamilyStyle={
-        fontFamily:fontFamily
-    }
-    return (
-        <Text onLayout={onLayout} style={[
-            styles.text,
-            {color: Colors.text,fontSize:computedFontSize},
-            fontFamilyStyle,
-            style
-        ]}
-        numberOfLines={numberOfLines!==undefined ? numberOfLines: undefined}
-        {...props}
-        >
-            {children}
-        </Text>
-    )
-}
+  // Calculate computed fontSize based on variant
+  let computedFontSize: number = fontSize || RFValue(12); // Fallback to RFValue(12) if no fontSize prop
 
-export default CustomText
+  switch (variant) {
+    case "h1":
+      computedFontSize = RFValue(22);
+      break;
+    case "h2":
+      computedFontSize = RFValue(20);
+      break;
+    case "h3":
+      computedFontSize = RFValue(18);
+      break;
+    case "h4":
+      computedFontSize = RFValue(16);
+      break;
+    case "h5":
+      computedFontSize = RFValue(14);
+      break;
+    case "h6":
+      computedFontSize = RFValue(12);
+      break;
+    case "h7":
+      computedFontSize = RFValue(12);
+      break;
+    case "h8":
+      computedFontSize = RFValue(10);
+      break;
+    case "h9":
+      computedFontSize = RFValue(9);
+      break;
+    case "body":
+      computedFontSize = RFValue(12);
+      break;
+    default:
+      computedFontSize = fontSize || RFValue(12); // Default to fontSize prop or fallback
+      break;
+  }
 
-const styles= StyleSheet.create({
-    text:{
-        textAlign:'left'
-    }
-})
+  const fontFamilyStyle = {
+    fontFamily: fontFamily,
+  };
+
+  return (
+    <Text
+      onLayout={onLayout}
+      style={[
+        styles.text,
+        { color: Colors.text, fontSize: computedFontSize },
+        fontFamilyStyle,
+        style,
+      ]}
+      numberOfLines={numberOfLines !== undefined ? numberOfLines : undefined}
+      {...props}
+    >
+      {children}
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  text: {
+    textAlign: "left",
+  },
+});
+
+export default CustomText;

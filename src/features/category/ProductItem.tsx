@@ -24,7 +24,7 @@ const ProductItem: FC<{item: any; index: number}> = ({index, item}) => {
             8 min
           </CustomText>
         </View>
-        <CustomText variant="h8" numberOfLines={1} fontFamily={Fonts.Medium}>
+        <CustomText variant="h8" numberOfLines={2} fontFamily={Fonts.Medium}>
           {item.name}
         </CustomText>
         <View style={styles.priceContainer}>
@@ -40,7 +40,7 @@ const ProductItem: FC<{item: any; index: number}> = ({index, item}) => {
         </View>
       </View>
 
-      <Text>ProductItem</Text>
+      
     </View>
   );
 };

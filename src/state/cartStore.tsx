@@ -28,16 +28,19 @@ export const useCartStore = create<CartStore>()(
           cartItem => cartItem._id === item._id,
         );
         if (existingItem !== -1) {
-          const updateCart = [...currentCart];
-          updateCart[existingItem] = {
-            ...updateCart[existingItem],
-            count: updateCart[existingItem].count + 1,
+          const updatedCart = [...currentCart];
+          updatedCart[existingItem] = {
+            ...updatedCart[existingItem],
+            count: updatedCart[existingItem].count + 1,
           };
-          set({cart: updateCart});
+          set({cart: updatedCart});
         } else {
-          cart: [...currentCart, {_id: item._id, item: item, count: 1}];
+          set({
+            cart: [...currentCart, {_id: item._id, item: item, count: 1}],
+          });
         }
       },
+
       clearCart: () => set({cart: []}),
       removeItem: id => {
         const currentCart = get().cart;
