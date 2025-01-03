@@ -14,6 +14,8 @@ export const customerLogins = async (phone: string) => {
         tokenStorage.set("accessToken", accessToken);
         tokenStorage.set("refreshToken", refreshToken);
         const { setUser } = useAuthStorage.getState();
+        console.log("Customer", customer);
+        
         setUser(customer);
     } catch (e) {
         if (axios.isAxiosError(e)) {
