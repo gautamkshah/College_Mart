@@ -5,7 +5,7 @@ import Content from '@features/dashBoard/Content'
 import ProductItem from './ProductItem'
 
 const ProductList : FC <{data:any}> = ({data}) => {
-     console.log(data)
+    
      
       const renderItem = ({item,index}:any)=>{
             return (

@@ -6,15 +6,15 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import React, { FC, useEffect, useRef } from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import NoticeAnimmation from './NoticeAnimmation';
-import { NoticeHeight, screenHeight } from '@utils/scalling';
+import {NoticeHeight, screenHeight} from '@utils/scalling';
 import Animated, {
   SlideInDown,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native';
+import {SafeAreaView} from 'react-native';
 import Visuals from './Visuals';
 import {
   CollapsibleContainer,
@@ -29,27 +29,29 @@ import AnimatedHeader from './AnimatedHeader';
 import StickySearchBar from './StickySearchBar';
 import Content from './Content';
 import CustomText from '@components/ui/CustomText';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { Fonts } from '@utils/Constants';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {Fonts} from '@utils/Constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import withCart from '@features/cart/withCart';
+import withLiveStatus from '@features/map/withLiveStatus';
+import { printNavigationStack } from '@utils/NavigationUtils';
 
 const ProductDashboard: FC = () => {
-  const { scrollY, expand } = useCollapsibleContext();
+  const {scrollY, expand} = useCollapsibleContext();
   const previousScroll = useRef<number>(0);
 
   const backtotopstyle = useAnimatedStyle(() => {
     const isscrollingup =
       scrollY.value < previousScroll.current && scrollY.value > 180;
-    const opacity = withTiming(isscrollingup ? 1 : 0, { duration: 300 });
-    const translateY = withTiming(isscrollingup ? 0 : 10, { duration: 300 });
+    const opacity = withTiming(isscrollingup ? 1 : 0, {duration: 300});
+    const translateY = withTiming(isscrollingup ? 0 : 10, {duration: 300});
 
     previousScroll.current = scrollY.value;
-    return { opacity, transform: [{ translateY }] };
+    return {opacity, transform: [{translateY}]};
   });
-
+   printNavigationStack()
   const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current;
-  
+
   const slideUp = () => {
     RNAnimated.timing(NoticePosition, {
       toValue: NOTICE_HEIGHT,
@@ -85,7 +87,7 @@ const ProductDashboard: FC = () => {
             scrollY.value = 0;
             expand();
           }}
-          style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
           <Icon
             name="arrow-up-circle-outline"
             color={'#fff'}
@@ -94,7 +96,7 @@ const ProductDashboard: FC = () => {
           <Text>
             <CustomText
               variant="h9"
-              style={{ color: '#fff' }}
+              style={{color: '#fff'}}
               fontFamily={Fonts.SemiBold}>
               Back to Top
             </CustomText>
@@ -120,16 +122,16 @@ const ProductDashboard: FC = () => {
             style={style.panelContainer}
             showsVerticalScrollIndicator={false}>
             <Content />
-            <View style={{ backgroundColor: '#F8F8F8', padding: 20 }}>
+            <View style={{backgroundColor: '#F8F8F8', padding: 20}}>
               <CustomText
                 variant="h1"
                 fontFamily={Fonts.Bold}
-                style={{ opacity: 0.2 }}>
+                style={{opacity: 0.2}}>
                 Your last minute App 🥭
               </CustomText>
               <CustomText
                 fontFamily={Fonts.Bold}
-                style={{ marginTop: 10, paddingBottom: 100, opacity: 0.2 }}>
+                style={{marginTop: 10, paddingBottom: 100, opacity: 0.2}}>
                 Developed by ❤️ Gautam
               </CustomText>
             </View>
@@ -162,4 +164,6 @@ const style = StyleSheet.create({
   },
 });
 
-export default withCart(withCollapsibleContext(ProductDashboard));
+export default withLiveStatus(
+  withCart(withCollapsibleContext(ProductDashboard)),
+);

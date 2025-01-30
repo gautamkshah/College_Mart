@@ -11,6 +11,7 @@ export const customerLogins = async (phone: string) => {
         console.log("Phone", phone);
         const response = await axiosClient.post('/api/customer/login', { phone });
         const { accessToken, refreshToken, customer } = response.data;
+        console.log(accessToken)
         tokenStorage.set("accessToken", accessToken);
         tokenStorage.set("refreshToken", refreshToken);
         const { setUser } = useAuthStorage.getState();
@@ -33,6 +34,7 @@ export const deliveryLogin = async (email: string,password:string) => {
         const { accessToken, refreshToken, deliveryPartner } = response.data;
         tokenStorage.set("accessToken", accessToken);
         tokenStorage.set("refreshToken", refreshToken);
+        console.log("Delivery", accessToken);
         const { setUser } = useAuthStorage.getState();
         setUser(deliveryPartner);
     } catch (e) {

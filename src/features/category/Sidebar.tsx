@@ -32,7 +32,7 @@ const Sidebar: FC<SidebarProps> = ({
   const animatedValues = categories?.map(() => useSharedValue(0));
 
   useEffect(() => {
-    console.log(selectedCategory);
+   
     let targetIndex = -1;
     categories?.forEach((category: any, index: number) => {
       const isSelected = selectedCategory?._id === category._id;

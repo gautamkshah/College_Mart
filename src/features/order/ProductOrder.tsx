@@ -20,7 +20,7 @@ import BillDetails from './BillDetails';
 import {hocStyles} from '@styles/GlobalStyles';
 import {useAuthStorage} from '@state/authStorage';
 import ArrowButton from '@components/ui/ArrowButton';
-import {navigate} from '@utils/NavigationUtils';
+import {navigate, printNavigationStack, replace} from '@utils/NavigationUtils';
 import {createOrder} from '@service/orderService';
 
 const ProductOrder: FC = () => {
@@ -28,8 +28,10 @@ const ProductOrder: FC = () => {
   const {getTotalPrice, cart, clearCart} = useCartStore();
   const totalItemPrice = getTotalPrice();
   const [loading, setLoading] = React.useState(false);
+   printNavigationStack()
 
   const handlePlaceOrder = async () => {
+    console.log('Place order',currentOrder);
     if (currentOrder !== null) {
       Alert.alert('Let first your order be delivered');
       return;
@@ -40,19 +42,24 @@ const ProductOrder: FC = () => {
       item: item._id,
       count: item.count,
     }));
-    console.log("dsd",formatData);
+
     console.log("totalItemPrice",totalItemPrice);
     if (formatData.length === 0) {
       Alert.alert('Cart is empty');
       return;
     }
+    
     setLoading(true);
     const data = await createOrder(formatData, totalItemPrice);
-    console.log("data",data);
+
     if (data != null) {
+  
       setCurrentOrder(data);
+    
+   
+      
       clearCart();
-      navigate('OrderSuccess', {...data});
+      replace('OrderSuccess', {...data});
     } else {
       Alert.alert('Something went wrong');
     }

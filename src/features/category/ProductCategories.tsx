@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import {getAllCategories, getProductByCategoryId} from '@service/ProductService';
 import ProductList from './ProductList';
 import withCart from '@features/cart/withCart';
+import { printNavigationStack } from '@utils/NavigationUtils';
 
 const ProductCategories: FC = () => {
   const [categorie, setCategories] = useState<any[]>([]);
@@ -13,6 +14,7 @@ const ProductCategories: FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [categoriesLoading, setCategoriesLoading] = useState<boolean>(true);
   const [productsLoading, setProductsLoading] = useState<boolean>(false);
+   printNavigationStack()
 
   const fetchCategories = async () => {
     try {

@@ -2,15 +2,18 @@ import { CommonActions, createNavigationContainerRef, StackActions } from "@reac
 
 export const navigationRef = createNavigationContainerRef();
 
-export function navigate(routeName: string, params?: Object) {
+export async function navigate(routeName: string, params?: Object) {
+    navigationRef.isReady()
     if (navigationRef.isReady()) {
+        console.log(routeName)
         navigationRef.dispatch(CommonActions.navigate(routeName, params));
     } else {
         console.warn('Navigation container is not ready.');
     }
 }
 
-export function replace(routeName: string, params?: Object) {
+export async function replace(routeName: string, params?: Object) {
+    navigationRef.isReady()
     if (navigationRef.isReady()) {
         navigationRef.dispatch(StackActions.replace(routeName, params));
     } else {
@@ -18,29 +21,52 @@ export function replace(routeName: string, params?: Object) {
     }
 }
 
-export function resetAndNavigate(routeName: string, params?: Object) {
+export async function resetAndNavigate(routeName: string) {
+    navigationRef.isReady()
     if (navigationRef.isReady()) {
         navigationRef.dispatch(CommonActions.reset({
             index: 0,
-            routes: [{ name: routeName, params }],
+            routes: [{ name: routeName}],
         }));
     } else {
         console.warn('Navigation container is not ready.');
     }
 }
 
-export function goBack() {
-    if (navigationRef.isReady() && navigationRef.canGoBack()) {
+export async function goBack() {
+    navigationRef.isReady()
+    if (navigationRef.isReady() ) {
         navigationRef.dispatch(CommonActions.goBack());
     } else {
         console.warn('Cannot go back - no previous screen in the stack or navigation container is not ready.');
     }
 }
 
-export function push(routeName: string, params?: Object) {
+export async function push(routeName: string, params?: Object) {
+    navigationRef.isReady()
     if (navigationRef.isReady()) {
         navigationRef.dispatch(StackActions.push(routeName, params));
     } else {
         console.warn('Navigation container is not ready.');
     }
 }
+
+
+export function printNavigationStack() {
+    if (navigationRef.isReady()) {
+        const state = navigationRef.getState();
+
+        if (state && state.routes) {
+            console.log('Current Navigation Stack:');
+            state.routes.forEach((route, index) => {
+                console.log(`Index: ${index}, Route: ${route.name}, Params: ${JSON.stringify(route.params) || '{}'}`);
+            });
+            console.log(`Active Index: ${state.index}`);
+        } else {
+            console.warn('No routes available in the navigation state.');
+        }
+    } else {
+        console.warn('Navigation container is not ready.');
+    }
+}
+

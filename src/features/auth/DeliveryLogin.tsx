@@ -1,7 +1,7 @@
 import { View, Text, Alert, StyleSheet } from 'react-native'
 import React, { FC } from 'react'
 import { useState } from 'react'
-import { resetAndNavigate } from '@utils/NavigationUtils'
+import { printNavigationStack, resetAndNavigate } from '@utils/NavigationUtils'
 import { deliveryLogin } from '@service/authService'
 import CustomSafeAreView from '@components/global/CustomSafeAreView'
 import { TextInput, Button } from 'react-native'
@@ -19,6 +19,7 @@ const DeliveryLogin: FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+   printNavigationStack()
 
   const handlelogin = async () => {
     setLoading(true)
@@ -74,9 +75,7 @@ const DeliveryLogin: FC = () => {
       </ScrollView>
 
     </CustomSafeAreView>
-    // <View>
-    //   <Text>deliveryLogin</Text>
-    // </View>
+    
   )
 }
 

@@ -4,6 +4,7 @@ import CustomText from '@components/ui/CustomText';
 import {Colors, Fonts} from '@utils/Constants';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RFValue} from 'react-native-responsive-fontsize';
+import { printNavigationStack } from '@utils/NavigationUtils';
 
 const ReportItem: FC<{
   iconName: string;
@@ -11,6 +12,7 @@ const ReportItem: FC<{
   title: string;
   price: number;
 }> = ({iconName, underline, title, price}) => {
+   printNavigationStack()
   return (
     <View style={[styles.flexRowBetween, {marginBottom: 10}]}>
       <View style={styles.flexRow}>
