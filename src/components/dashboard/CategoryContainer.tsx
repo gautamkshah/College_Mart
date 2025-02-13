@@ -1,28 +1,33 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
-import React, {FC} from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { FC } from 'react';
 import ScalePress from '@components/ui/ScalePress';
-import {navigate, printNavigationStack} from '@utils/NavigationUtils';
+import { navigate, printNavigationStack } from '@utils/NavigationUtils';
 import CustomText from '@components/ui/CustomText';
-import {Fonts} from '@utils/Constants';
+import { Fonts } from '@utils/Constants';
 
-const CategoryContainer: FC<{data: any}> = ({data}) => {
-   printNavigationStack()
+const CategoryContainer: FC<{ data: any }> = ({ data }) => {
+  try {
+    printNavigationStack();
+  } catch (error) {
+    console.error('Navigation stack error:', error);
+  }
+
   const renderItems = (items: any[]) => {
     return (
       <>
-        {' '}
         {items.map((item, index) => {
           return (
             <ScalePress
-              onPress={() => navigate('ProductCategories')}
+              onPress={() => {
+                console.log('Navigating to ProductCategories');
+                navigate('ProductCategories');
+              }}
               key={index}
-              style={styles.item}>
+              style={styles.item}
+            >
               <View style={styles.imageContainer}>
-                <Image source={item.image} style={styles.image} />
-                <CustomText
-                  style={styles.text}
-                  variant="h8"
-                  fontFamily={Fonts.Medium}>
+                <Image source={typeof item.image === 'string' ? { uri: item.image } : item.image} style={styles.image} />
+                <CustomText style={styles.text} variant="h8" fontFamily={Fonts.Medium}>
                   {item.name}
                 </CustomText>
               </View>
@@ -34,15 +39,15 @@ const CategoryContainer: FC<{data: any}> = ({data}) => {
   };
 
   return (
-    <View style={styles.conatiner}>
-      <View style={styles.row}>{renderItems(data?.slice(0, 4))}</View>
-      <View style={styles.row}>{renderItems(data?.slice(4, 8))}</View>
+    <View style={styles.container}>
+      <View style={styles.row}>{renderItems(Array.isArray(data) ? data.slice(0, 4) : [])}</View>
+      <View style={styles.row}>{renderItems(Array.isArray(data) ? data.slice(4, 8) : [])}</View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  conatiner: {
+  container: {
     marginVertical: 15,
   },
   row: {
@@ -56,7 +61,6 @@ const styles = StyleSheet.create({
   },
   item: {
     width: '22%',
-
     justifyContent: 'center',
     alignItems: 'center',
   },

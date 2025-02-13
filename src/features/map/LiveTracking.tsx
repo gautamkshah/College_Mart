@@ -15,7 +15,7 @@ import withLiveStatus from './withLiveStatus';
 
 const LiveTracking: FC = () => {
   const {currentOrder, setCurrentOrder} = useAuthStorage();
-  console.log('Livetrack', currentOrder?._id);
+  
   const fetchOrderDetails = async () => {
     const data = await getOrderById(currentOrder?._id as any);
     setCurrentOrder(data);

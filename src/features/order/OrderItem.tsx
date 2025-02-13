@@ -4,10 +4,9 @@ import { Colors, Fonts } from '@utils/Constants'
 import { Image } from 'react-native'
 import CustomText from '@components/ui/CustomText'
 import UniversalAdd from '@components/ui/UniversalAdd'
-import { printNavigationStack } from '@utils/NavigationUtils'
 
 const OrderItem:FC<{item:any}> = ({item}) => {
-       printNavigationStack()
+      
   return (
     <View style={styles.flexRow}>
       <View style={styles.imgContainer}>

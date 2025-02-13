@@ -16,7 +16,7 @@ export const customerLogins = async (phone: string) => {
         tokenStorage.set("refreshToken", refreshToken);
         const { setUser } = useAuthStorage.getState();
         console.log("Customer", customer);
-        
+
         setUser(customer);
     } catch (e) {
         if (axios.isAxiosError(e)) {
@@ -27,10 +27,10 @@ export const customerLogins = async (phone: string) => {
     }
 };
 
-export const deliveryLogin = async (email: string,password:string) => {
+export const deliveryLogin = async (email: string, password: string) => {
     try {
         console.log("Email", email);
-        const response = await axiosClient.post('/api/delivery/login', { email,password });
+        const response = await axiosClient.post('/api/delivery/login', { email, password });
         const { accessToken, refreshToken, deliveryPartner } = response.data;
         tokenStorage.set("accessToken", accessToken);
         tokenStorage.set("refreshToken", refreshToken);
@@ -56,8 +56,8 @@ export const refresh_tokens = async () => {
         tokenStorage.set("accessToken", new_access_token)
         tokenStorage.set("refreshToken", new_refresh_token)
         return new_access_token
-        
-        
+
+
     } catch (e) {
 
         console.log("Refresh token error", e)
@@ -66,12 +66,12 @@ export const refresh_tokens = async () => {
     }
 }
 
-export const refetchUser = async (setUser: any ) => {
+export const refetchUser = async (setUser: any) => {
     try {
         const response = await appAxios.get(`/user`)
-        setUser(response.data.user)     
+        setUser(response.data.user)
     } catch (e) {
-        console.log("Login error",e)
+        console.log("Login error", e)
     }
 }
 

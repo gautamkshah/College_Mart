@@ -5,7 +5,7 @@ export const createOrder = async (items: any, totalPrice: number) => {
   try {
     const response = await axiosClient.post(`/api/order`, {
       items: items,
-      branch: 'KL main branch',
+      branch: '678f2c12b179161335b42ca7',
       totalPrice: totalPrice,
     });
     // console.log("Create Order response",response.data)

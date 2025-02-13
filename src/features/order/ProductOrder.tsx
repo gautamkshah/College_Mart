@@ -20,7 +20,7 @@ import BillDetails from './BillDetails';
 import {hocStyles} from '@styles/GlobalStyles';
 import {useAuthStorage} from '@state/authStorage';
 import ArrowButton from '@components/ui/ArrowButton';
-import {navigate, printNavigationStack, replace} from '@utils/NavigationUtils';
+import { replace} from '@utils/NavigationUtils';
 import {createOrder} from '@service/orderService';
 
 const ProductOrder: FC = () => {
@@ -28,7 +28,6 @@ const ProductOrder: FC = () => {
   const {getTotalPrice, cart, clearCart} = useCartStore();
   const totalItemPrice = getTotalPrice();
   const [loading, setLoading] = React.useState(false);
-   printNavigationStack()
 
   const handlePlaceOrder = async () => {
     console.log('Place order',currentOrder);

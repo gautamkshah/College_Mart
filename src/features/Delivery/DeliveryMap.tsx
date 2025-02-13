@@ -35,7 +35,7 @@ const DeliveryMap: FC = () => {
 
     setOrderData(data);
   };
-   printNavigationStack()
+   
 
   useEffect(() => {
     fetchOrderDetails();

@@ -1,19 +1,23 @@
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import React, {FC} from 'react';
-import {useAuthStorage} from '@state/authStorage';
-import {Colors, Fonts} from '@utils/Constants';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { FC } from 'react';
+import { useAuthStorage } from '@state/authStorage';
+import { Colors, Fonts } from '@utils/Constants';
 import CustomText from '@components/ui/CustomText';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {resetAndNavigate} from '@utils/NavigationUtils';
-import {storage, tokenStorage} from '@state/storage';
+import { resetAndNavigate } from '@utils/NavigationUtils';
+import { storage, tokenStorage } from '@state/storage';
+import ActionButton from '@features/Profile/ActionButton';
 
 interface DeliveryHeaderProps {
   name: string;
   email?: string;
 }
 
-const DeliveryHeader: FC<DeliveryHeaderProps> = ({name, email}) => {
-  const {logout} = useAuthStorage();
+const DeliveryHeader: FC<DeliveryHeaderProps> = ({ name, email }) => {
+  const { logout, user } = useAuthStorage();
+
+
+ 
   return (
     <View style={styles.flexRow}>
       <View style={styles.imgContainer}>
@@ -30,16 +34,17 @@ const DeliveryHeader: FC<DeliveryHeaderProps> = ({name, email}) => {
           {email}
         </CustomText>
       </View>
-      <TouchableOpacity
+      <ActionButton
+        icon="log-out-outline"
+        label=""
         onPress={() => {
-          console.log('Logout');
+
           logout();
           tokenStorage.clearAll();
           storage.clearAll();
           resetAndNavigate('CustomerLogin');
-        }}>
-        <Icon name="logout" size={20} color={Colors.text} onPress={logout} />
-      </TouchableOpacity>
+        }}
+      />
     </View>
   );
 };

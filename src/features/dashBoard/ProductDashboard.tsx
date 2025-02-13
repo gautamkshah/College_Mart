@@ -34,7 +34,6 @@ import {Fonts} from '@utils/Constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import withCart from '@features/cart/withCart';
 import withLiveStatus from '@features/map/withLiveStatus';
-import { printNavigationStack } from '@utils/NavigationUtils';
 
 const ProductDashboard: FC = () => {
   const {scrollY, expand} = useCollapsibleContext();
@@ -49,7 +48,9 @@ const ProductDashboard: FC = () => {
     previousScroll.current = scrollY.value;
     return {opacity, transform: [{translateY}]};
   });
-   printNavigationStack()
+
+
+
   const NoticePosition = useRef(new RNAnimated.Value(NOTICE_HEIGHT)).current;
 
   const slideUp = () => {
@@ -82,26 +83,28 @@ const ProductDashboard: FC = () => {
         <Visuals />
         <SafeAreaView />
 
-        <TouchableOpacity
-          onPress={() => {
-            scrollY.value = 0;
-            expand();
-          }}
-          style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
-          <Icon
-            name="arrow-up-circle-outline"
-            color={'#fff'}
-            size={RFValue(12)}
-          />
-          <Text>
-            <CustomText
-              variant="h9"
-              style={{color: '#fff'}}
-              fontFamily={Fonts.SemiBold}>
-              Back to Top
-            </CustomText>
-          </Text>
-        </TouchableOpacity>
+        <Animated.View style={[style.backtotopbutton, backtotopstyle]}>
+          <TouchableOpacity
+            onPress={() => {
+              scrollY.value = 0;
+              expand();
+            }}
+            style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
+            <Icon
+              name="arrow-up-circle-outline"
+              color={'#fff'}
+              size={RFValue(12)}
+            />
+            <Text>
+              <CustomText
+                variant="h9"
+                style={{color: '#fff'}}
+                fontFamily={Fonts.SemiBold}>
+                Back to Top
+              </CustomText>
+            </Text>
+          </TouchableOpacity>
+        </Animated.View>
 
         <CollapsibleContainer style={style.panelContainer}>
           <CollapsibleHeaderContainer containerStyle={style.transparent}>
@@ -122,16 +125,17 @@ const ProductDashboard: FC = () => {
             style={style.panelContainer}
             showsVerticalScrollIndicator={false}>
             <Content />
-            <View style={{backgroundColor: '#F8F8F8', padding: 20}}>
+            <View style={style.footer}>
               <CustomText
-                variant="h1"
+                variant="h5"
                 fontFamily={Fonts.Bold}
-                style={{opacity: 0.2}}>
+                style={style.footerText}>
                 Your last minute App 🥭
               </CustomText>
               <CustomText
-                fontFamily={Fonts.Bold}
-                style={{marginTop: 10, paddingBottom: 100, opacity: 0.2}}>
+                variant="body"
+                fontFamily={Fonts.Regular}
+                style={[style.footerText, style.footerSubText]}>
                 Developed by ❤️ Gautam
               </CustomText>
             </View>
@@ -161,6 +165,28 @@ const style = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     zIndex: 999,
+  },
+
+  footer: {
+    backgroundColor: '#F8F8F8',
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+  },
+  footerText: {
+    color: '#333',
+    fontSize: RFValue(14),
+    fontFamily: Fonts.Regular,
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+  footerSubText: {
+    marginTop: 8,
+    fontSize: RFValue(12),
+    opacity: 0.6,
   },
 });
 

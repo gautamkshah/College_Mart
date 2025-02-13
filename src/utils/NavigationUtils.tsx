@@ -5,7 +5,7 @@ export const navigationRef = createNavigationContainerRef();
 export async function navigate(routeName: string, params?: Object) {
     navigationRef.isReady()
     if (navigationRef.isReady()) {
-        console.log(routeName)
+        
         navigationRef.dispatch(CommonActions.navigate(routeName, params));
     } else {
         console.warn('Navigation container is not ready.');
@@ -53,20 +53,6 @@ export async function push(routeName: string, params?: Object) {
 
 
 export function printNavigationStack() {
-    if (navigationRef.isReady()) {
-        const state = navigationRef.getState();
-
-        if (state && state.routes) {
-            console.log('Current Navigation Stack:');
-            state.routes.forEach((route, index) => {
-                console.log(`Index: ${index}, Route: ${route.name}, Params: ${JSON.stringify(route.params) || '{}'}`);
-            });
-            console.log(`Active Index: ${state.index}`);
-        } else {
-            console.warn('No routes available in the navigation state.');
-        }
-    } else {
-        console.warn('Navigation container is not ready.');
-    }
+    
 }
 

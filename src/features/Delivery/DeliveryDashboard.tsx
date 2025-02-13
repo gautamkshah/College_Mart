@@ -36,7 +36,7 @@ const DeliveryDashboard = () => {
       <OrderItem index={index} item={item}/>
     )
   }
- printNavigationStack()
+
 
   useEffect(()=>{
     fetchData()

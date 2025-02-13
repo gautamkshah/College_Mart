@@ -1,5 +1,5 @@
-import {View, Text, StyleSheet, Animated, Image, Keyboard} from 'react-native';
-import React, {FC, useEffect, useRef, useState} from 'react';
+import { View, Text, StyleSheet, Animated, Image, Keyboard, Alert } from 'react-native';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Gesture,
   GestureHandlerRootView,
@@ -8,14 +8,14 @@ import {
 } from 'react-native-gesture-handler';
 import CustomSafeAreView from '@components/global/CustomSafeAreView';
 import ProductsSlider from '@components/login/ProductsSlider';
-import {printNavigationStack, resetAndNavigate} from '@utils/NavigationUtils';
+import { printNavigationStack, resetAndNavigate } from '@utils/NavigationUtils';
 import CustomText from '@components/ui/CustomText';
-import {Fonts, lightColors} from '@utils/Constants';
+import { Fonts, lightColors } from '@utils/Constants';
 import CustomInput from '@components/ui/Custominput';
 import CustomButton from '@components/ui/CustomButton';
 import useKeyboardOffsetHeight from '@utils/usekeyboardOffsetheight';
 import LinearGradient from 'react-native-linear-gradient';
-import {customerLogins} from '@service/authService';
+import { customerLogins } from '@service/authService';
 
 const bottomColors = [...lightColors].reverse();
 
@@ -25,7 +25,7 @@ const CustomerLogin: FC = () => {
   const [gestureSequence, setGestureSequence] = useState<string[]>([]);
   const keyboardOffsetHeight = useKeyboardOffsetHeight();
   const animatedValue = useRef(new Animated.Value(0)).current;
-   printNavigationStack()
+
 
   useEffect(() => {
     if (keyboardOffsetHeight == 0) {
@@ -51,37 +51,36 @@ const CustomerLogin: FC = () => {
       resetAndNavigate('ProductDashboard');
     } catch (e) {
       console.log('Loading Failed', e);
+      Alert.alert('Error', 'Failed to log in. Please try again.');
     } finally {
       setLoading(false);
     }
   };
-  const handleGesture = ({nativeEvent}: any) => {
+
+  const handleGesture = ({ nativeEvent }: any) => {
     if (nativeEvent.state === State.END) {
-      const {translationX, translationY} = nativeEvent;
+      const { translationX, translationY } = nativeEvent;
+      const threshold = 50; // Minimum distance to detect a swipe
       let direction = '';
-      if (Math.abs(translationX) > Math.abs(translationY)) {
-        if (translationX > 0) {
-          direction = 'right';
+
+      if (Math.abs(translationX) > threshold || Math.abs(translationY) > threshold) {
+        if (Math.abs(translationX) > Math.abs(translationY)) {
+          direction = translationX > 0 ? 'right' : 'left';
         } else {
-          direction = 'left';
-        }
-      } else {
-        if (translationY > 0) {
-          direction = 'down';
-        } else {
-          direction = 'up';
+          direction = translationY > 0 ? 'down' : 'up';
         }
       }
-      console.log(translationX, translationY, direction);
 
       const newSequence = [...gestureSequence, direction].slice(-5);
       setGestureSequence(newSequence);
-      if (newSequence.join(' ') == 'up up down left right') {
+
+      if (newSequence.join(' ') === 'up up down left right') {
         setGestureSequence([]);
         resetAndNavigate('DeliveryLogin');
       }
     }
   };
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.container}>
@@ -93,8 +92,8 @@ const CustomerLogin: FC = () => {
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="handled"
               contentContainerStyle={styles.subContainer}
-              style={{transform: [{translateY: animatedValue}]}}>
-              <LinearGradient colors={bottomColors} style={styles.gradient} />
+              style={{ transform: [{ translateY: animatedValue }] }}>
+              <LinearGradient colors={bottomColors} style={[styles.gradient, { height: 100 }]} />
 
               <View style={styles.content}>
                 <Image
