@@ -1,79 +1,123 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# College Mart 🛍️🎉🚀
 
-# Getting Started
+## 🛒 About College Mart
+**College Mart** is a comprehensive shopping platform designed specifically for college students and faculty. 🎓🛍️ It offers a seamless shopping experience with features like authentication, a cart system, real-time delivery tracking via Google Maps, and an intuitive UI/UX with smooth animations. ✨📍 The app caters to both customers and delivery partners through separate logins and dedicated functionalities.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## 🚀 Features 🎯🛠️🎉
 
-## Step 1: Start the Metro Server
+### 🔑 Authentication 🔐✅🔓
+- Secure user authentication system.
+- Login and registration with credentials.
+- Persistent user sessions.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### 🛍️ Shopping & Cart System 🛒📦💳
+- Browse and shop for various products available in the mart.
+- Add items to the cart for a seamless checkout experience.
+- Real-time updates of cart items and order history.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### 📍 Real-Time Delivery Tracking 🚚📡🌍
+- Integrated **Google Maps** for real-time order tracking.
+- Live updates on delivery status.
+- Customers can see delivery progress directly from their profile section.
 
-```bash
-# using npm
-npm start
+### 👥 Dual Login System 🔄👨‍💼👨‍🚀
+- **Customer Interface**: Allows users to browse, shop, and track their orders.
+- **Delivery Partner Interface**: View available deliveries, delivered orders, and track order completion.
+- Access to delivery partner features through a unique swipe gesture (Two Up, One Down, One Left, One Right). 🎭📲
 
-# OR using Yarn
-yarn start
-```
+### 📦 Order Management 📑✅📌
+- Customers can view their past orders along with delivery status.
+- Delivery partners have separate sections for **available** and **delivered** orders.
 
-## Step 2: Start your Application
+### 🖼️ Banner Section (Carousel) 📢🔥🎨
+- Dynamic carousel on the home page displaying recent discounts and best-selling products.
+- Smooth transition animations for a better user experience.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### 🏗️ Smooth Animations ✨🎞️🔄
+- "Back to Top" button for easy navigation.
+- Smooth UI interactions for seamless experience.
 
-### For Android
+### ✅ Checkout Page 🏁📜💳
+- Displays all necessary order details before confirming a purchase.
+- Provides payment options and delivery address confirmation.
 
-```bash
-# using npm
-npm run android
+### 🎭 Splash Screen 🚀📲🎬
+- A well-designed splash screen for a polished app entry experience.
 
-# OR using Yarn
-yarn android
-```
+## 🛠️ Tech Stack ⚙️🖥️🔧
+- **Frontend**: React Native
+- **Backend**: Node.js, Mongoose
+- **State Management**: MMKV, Redux
+- **Maps Integration**: Google Maps API
+- **Database**: MongoDB
+- **Authentication**: Firebase Authentication
 
-### For iOS
 
-```bash
-# using npm
-npm run ios
+## 📸 Screenshots 📷🖼️📁
 
-# OR using Yarn
-yarn ios
-```
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/fa9aa315-2377-495d-b607-3f7f42111fca" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/62109129-57c3-4f6b-b464-f50664ff6788" width="200"></td>
+     <td><img src="https://github.com/user-attachments/assets/60264b70-8568-4010-a6b9-12408cd6e9ca" width="200"></td> 
+    <td><img src="https://github.com/user-attachments/assets/4741432e-e6c4-4749-9652-882997c1f07d" width="200"></td>
+    
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/94315947-fb26-4ef5-a445-4c129824886e" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/fff64a1e-7237-4375-bc2d-b9f527e6ad23" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/38961766-8e83-46cc-a943-e525b35d4ed0" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/5a3d1c7d-bc32-4da2-be8c-6d767c762472" width="200"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/7d996b71-2fba-4dc6-9723-681cba6b431b" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/65950bf7-8c7b-4873-9d22-552138631826" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/6be4aa23-61e4-4cdb-be2e-15e9441de697" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/0c27ab2e-9132-4ecf-906f-2d1aae5d809a" width="200"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/b2afc24c-7e5a-4681-8165-1fed076c06aa" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/458d7352-67c5-478a-8936-bb109fc6a4a9" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/6d4187ba-4426-437c-a6bf-634da9b0d574" width="200"></td>
+    <td><img src="https://github.com/user-attachments/assets/8c716e22-6dde-4a7a-ac62-34471654ce83" width="200"></td>
+  </tr>
+</table>
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
 
-Now that you have successfully run the app, let's modify it.
+## 🚀 Installation & Setup 📥💻🛠️
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/gautamkshah/College_Mart.git
+   ```
+2. Navigate to the project folder:
+   ```sh
+   cd College_Mart
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the application:
+   ```sh
+   npx start
+   ```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## 📝 License 📜⚖️🔖
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## 💡 Future Enhancements 🚀🔮💭
+- AI-based recommendation system for personalized shopping.
+- Integration with UPI payment gateways.
+- Dark mode for better accessibility.
 
-## Congratulations! :tada:
+## 🤝 Contributing 🛠️🤲📌
+Contributions are welcome! Feel free to fork the repo and submit a pull request.
 
-You've successfully run and modified your React Native App. :partying_face:
+## 📞 Contact 📧📱🌐
+For any queries, feel free to reach out:
+- Email: gautam2002gkp@gmail.com
+- LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/gautam-kumar-shah-2995a522a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+- GitHub: [GitHub Profile](https://github.com/gautamkshah)
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
