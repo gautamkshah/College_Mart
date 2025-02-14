@@ -3,6 +3,9 @@
 ## 🛒 About College Mart
 **College Mart** is a comprehensive shopping platform designed specifically for college students and faculty. 🎓🛍️ It offers a seamless shopping experience with features like authentication, a cart system, real-time delivery tracking via Google Maps, and an intuitive UI/UX with smooth animations. ✨📍 The app caters to both customers and delivery partners through separate logins and dedicated functionalities.
 
+🎥 **Check out the demo video here:** [Watch Now](https://drive.google.com/file/d/120C89FvWr1QqD3eTFa1J8OeTUhfYGTT8/view)
+
+
 ## 🚀 Features 🎯🛠️🎉
 
 ### 🔑 Authentication 🔐✅🔓
